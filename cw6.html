@@ -90,8 +90,8 @@ body {
 	z-index: 1;
 }
 		</style>
-		<link id="-gd-engine-icon" rel="icon" type="image/png" href="cw5.icon.png" />
-<link rel="apple-touch-icon" href="cw5.apple-touch-icon.png"/>
+		<link id="-gd-engine-icon" rel="icon" type="image/png" href="cw6.icon.png" />
+<link rel="apple-touch-icon" href="cw6.apple-touch-icon.png"/>
 
 	</head>
 	<body>
@@ -104,14 +104,14 @@ body {
 		</noscript>
 
 		<div id="status">
-			<img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="cw5.png" alt="">
+			<img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="cw6.png" alt="">
 			<progress id="status-progress"></progress>
 			<div id="status-notice"></div>
 		</div>
 
-		<script src="cw5.js"></script>
+		<script src="cw6.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"cw5","experimentalVK":false,"fileSizes":{"cw5.pck":10895680,"cw5.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"cw6","experimentalVK":false,"fileSizes":{"cw6.pck":10894864,"cw6.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
@@ -215,6 +215,22 @@ const engine = new Engine(GODOT_CONFIG);
 	}
 }());
 		</script>
-	</body>
+	
+<style>
+#rotate-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;background:#14161F;color:#FFD166;
+font-family:monospace;align-items:center;justify-content:center;flex-direction:column;text-align:center;font-size:22px;line-height:1.5}
+#rotate-overlay .ico{font-size:72px;margin-bottom:12px}
+@media (orientation: portrait) and (max-width: 900px){#rotate-overlay{display:flex}#canvas,canvas{visibility:hidden}}
+</style>
+<div id="rotate-overlay"><div class="ico">&#10227;</div><div>ROTATE YOUR PHONE<br>TO LANDSCAPE</div></div>
+<script>
+(function(){
+  function lockLandscape(){ try{ if(screen.orientation && screen.orientation.lock){ screen.orientation.lock('landscape').catch(function(){}); } }catch(e){} }
+  lockLandscape();
+  window.addEventListener('pointerdown', lockLandscape);
+  window.addEventListener('orientationchange', lockLandscape);
+})();
+</script>
+</body>
 </html>
 
