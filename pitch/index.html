@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARROW COMMANDER | Pixel castle siege archery</title>
+<meta name="description" content="Arrow Commander: aim every arrow yourself while your army fights for you. 10-stage pixel-art castle siege, built solo in Godot.">
+<meta property="og:title" content="ARROW COMMANDER">
+<meta property="og:description" content="Aim every arrow yourself while your army fights for you. Pixel castle siege, 10 stages, one Black King.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#10131d; --ink2:#181d2c; --panel:#1d2336; --line:#3a4466;
+  --gold:#f2c14e; --gold2:#b8872a; --red:#db4b43; --blue:#5b8de0;
+  --text:#e8e4d6; --dim:#9aa3bd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--text);font-family:'VT323',monospace;font-size:22px;line-height:1.3;
+  background-image:radial-gradient(#ffffff08 1px,transparent 1px);background-size:4px 4px;-webkit-text-size-adjust:100%}
+img{display:block;width:100%;height:auto;image-rendering:pixelated}
+a{color:var(--gold)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+h1,h2,h3,.px{font-family:'Press Start 2P',monospace;font-weight:400;line-height:1.35}
+h2{font-size:15px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:18px}
+h2::before{content:"";display:inline-block;width:10px;height:10px;background:var(--gold);margin-right:10px;box-shadow:0 0 0 2px var(--ink),0 0 0 4px var(--gold2)}
+section{padding:40px 0;border-top:4px solid var(--ink2)}
+/* ink panel with stepped pixel corners */
+.panel{background:var(--panel);border:3px solid var(--line);box-shadow:inset 0 0 0 2px var(--ink),4px 4px 0 var(--ink2);padding:16px}
+.btn{display:inline-block;font-family:'Press Start 2P',monospace;font-size:13px;text-decoration:none;color:var(--ink);
+  background:var(--gold);padding:14px 18px;border:3px solid var(--ink);box-shadow:0 0 0 3px var(--gold2),5px 5px 0 3px var(--ink2);
+  text-align:center;cursor:pointer;transition:transform .08s}
+.btn:hover,.btn:focus-visible{transform:translate(-2px,-2px);background:#ffd36b;outline:none}
+.btn:active{transform:translate(2px,2px)}
+.btn.ghost{background:var(--panel);color:var(--gold);box-shadow:0 0 0 3px var(--line),5px 5px 0 3px var(--ink2)}
+.btn.ghost:hover{background:var(--ink2)}
+
+/* HERO */
+.hero{position:relative;border-top:0;padding:0}
+.hero-art{position:relative;overflow:hidden;background:#000}
+.hero-art img{width:100%;min-height:240px;object-fit:cover;object-position:62% 50%}
+.hero-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#10131d00 35%,#10131d 100%)}
+.hero-body{margin-top:-64px;position:relative;z-index:2;text-align:center;padding-bottom:36px}
+.title{font-size:clamp(24px,8.4vw,60px);color:var(--gold);letter-spacing:2px;
+  text-shadow:0 4px 0 var(--gold2),0 8px 0 var(--ink),0 0 0 var(--ink),3px 3px 0 var(--ink),-3px 3px 0 var(--ink)}
+.title span{display:block;color:var(--text);text-shadow:0 4px 0 #6b6a60,0 8px 0 var(--ink)}
+.hook{font-size:26px;max-width:640px;margin:26px auto 22px;color:var(--text)}
+.cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:0 8px}
+.cta .btn{flex:1 1 220px;max-width:320px}
+.demo-note{color:var(--dim);font-size:19px;margin-top:20px}
+
+/* STRIP of facts */
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:0}
+.fact{text-align:center;padding:14px 6px}
+.fact b{display:block;font-family:'Press Start 2P',monospace;font-weight:400;color:var(--gold);font-size:20px;margin-bottom:8px}
+.fact span{color:var(--dim);font-size:19px}
+
+/* concept */
+.concept p{margin-bottom:14px;max-width:720px}
+.concept .big{font-size:27px;color:var(--text)}
+.rules{list-style:none;margin-top:18px;display:grid;gap:10px}
+.rules li{padding-left:22px;position:relative}
+.rules li::before{content:"";position:absolute;left:0;top:9px;width:10px;height:10px;background:var(--red)}
+
+/* screenshots */
+.shots{display:grid;grid-template-columns:1fr;gap:22px}
+.shot{margin:0}
+.shot .frame{border:3px solid var(--line);box-shadow:0 0 0 2px var(--ink),5px 5px 0 var(--ink2);background:#000;overflow:hidden}
+.shot figcaption{margin-top:10px;font-size:20px;color:var(--dim)}
+.shot figcaption b{font-family:'Press Start 2P',monospace;font-weight:400;font-size:10px;color:var(--gold);display:block;margin-bottom:5px}
+@media(max-width:700px){.shot .frame{margin:0 -16px;border-left:0;border-right:0;box-shadow:none}.shot .frame img{min-height:0}}
+
+/* features */
+.feat{display:grid;grid-template-columns:1fr;gap:14px}
+.feat .panel h3{font-size:11px;color:var(--gold);margin-bottom:10px}
+.feat .panel p{color:var(--text)}
+.tag{display:inline-block;font-family:'Press Start 2P',monospace;font-size:9px;padding:5px 7px;border:2px solid var(--line);color:var(--dim);margin:0 6px 6px 0;vertical-align:middle}
+.tag.plan{border-color:var(--gold2);color:var(--gold)}
+.tag.idea{border-style:dashed}
+
+/* roadmap */
+.road{list-style:none;display:grid;gap:12px}
+.road li{display:flex;gap:12px;align-items:flex-start}
+.road .tag{flex:none;margin:3px 0 0 0;min-width:74px;text-align:center}
+.road .tag.done{background:var(--gold);color:var(--ink);border-color:var(--gold2)}
+
+/* publishers */
+.pub{border-color:var(--gold2)}
+.pub ul{list-style:none;display:grid;gap:10px;margin:14px 0 18px}
+.pub li::before{content:">";color:var(--gold);margin-right:10px;font-family:'Press Start 2P',monospace;font-size:12px}
+.pub .ask{font-family:'Press Start 2P',monospace;font-size:13px;color:var(--gold);line-height:1.6}
+
+/* form */
+form{display:grid;gap:12px;max-width:520px}
+label{font-family:'Press Start 2P',monospace;font-size:10px;color:var(--gold)}
+input[type=email],input[type=text]{width:100%;font:inherit;font-size:24px;color:var(--text);background:var(--ink);border:3px solid var(--line);padding:10px 12px;border-radius:0}
+input:focus{outline:none;border-color:var(--gold)}
+.small{font-size:18px;color:var(--dim)}
+.contact dl{display:grid;grid-template-columns:auto 1fr;gap:8px 16px}
+.contact dt{font-family:'Press Start 2P',monospace;font-size:10px;color:var(--gold);padding-top:6px}
+.contact dd{word-break:break-word}
+footer{padding:28px 0 48px;color:var(--dim);font-size:18px;border-top:4px solid var(--ink2)}
+
+@media(min-width:760px){
+  body{font-size:24px}
+  h2{font-size:18px}
+  .hero-art img{height:62vh;max-height:620px}
+  .hero-body{margin-top:-110px}
+  .facts{grid-template-columns:repeat(4,1fr)}
+  .shots{grid-template-columns:1fr 1fr}
+  .shot.wide{grid-column:1 / -1}
+  .feat{grid-template-columns:1fr 1fr}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<script>
+/* ===== OWNER: FILL THESE IN. Nothing is sent anywhere until you do. ===== */
+const PLAY_DEMO_URL = "https://whoisbreyer.github.io/castle-warfare-demo/";          // e.g. your itch.io / Pages link to the 3-stage web demo
+const OWNER_NAME    = "Breyer White";               // shown in contact + footer
+const OWNER_EMAIL   = "";              // contact + signup mailto target
+const INSTAGRAM_URL = "https://instagram.com/whoisbreyer";
+const INSTAGRAM_HANDLE = "@whoisbreyer";
+const DM_URL = "https://ig.me/m/whoisbreyer";
+const SIGNUP_ACTION = DM_URL;         // swap for a form-service URL later; mailto opens the visitor's mail app
+</script>
+
+<header class="hero">
+  <div class="hero-art"><img src="assets/key_art.png" alt="Arrow Commander key art: two castles at war under a black eclipse, the Black King looming over the field" width="853" height="480" fetchpriority="high"></div>
+  <div class="wrap hero-body">
+    <h1 class="title">ARROW<span>COMMANDER</span></h1>
+    <p class="hook">Aim every arrow yourself while your army fights for you. Hold the line, then break the Black King.</p>
+    <div class="cta">
+      <a class="btn" data-play href="#">PLAY DEMO</a>
+      <a class="btn ghost" href="#signup">GET UPDATES</a>
+    </div>
+    <p class="demo-note">Free in your browser. All 10 stages, no download.</p>
+  </div>
+</header>
+
+<main>
+<section style="border-top:0;padding-top:8px">
+  <div class="wrap facts">
+    <div class="panel fact"><b>10</b><span>stages, start to finish</span></div>
+    <div class="panel fact"><b>5</b><span>special arrows</span></div>
+    <div class="panel fact"><b>7</b><span>unit slots</span></div>
+    <div class="panel fact"><b>1</b><span>Black King</span></div>
+  </div>
+</section>
+
+<section class="concept" id="what">
+  <div class="wrap">
+    <h2>What it is</h2>
+    <p class="big">A side-view castle siege. Your castle on the left, the Black Legion on the right, one ground lane and the sky above it.</p>
+    <p>You are the Commander. You move left and right, aim a real arc with the mouse, and loose arrows with real physics. Your soldiers march, clash and die on their own. Recruit more with gold, or pick off the enemy that matters.</p>
+    <ul class="rules">
+      <li>Destroy the enemy castle and you win on the spot.</li>
+      <li>Lose your castle and you do not lose the run. Reinforcements stop and the Commander is forced onto the field for a last stand.</li>
+      <li>The only way to lose is the Commander falling. No healing regen, so protect him.</li>
+      <li>Gold carries over between stages and retries. No timers, no XP trees, one currency.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="shots">
+  <div class="wrap">
+    <h2>In the game</h2>
+    <div class="shots">
+      <figure class="shot wide"><div class="frame"><img src="assets/shot_valley.png" alt="Stage 1 green valley, the first assault" width="853" height="360" loading="lazy"></div>
+        <figcaption><b>STAGE 1 / GREEN VALLEY</b>First assault. Your castle, their castle, a long field between.</figcaption></figure>
+      <figure class="shot"><div class="frame"><img src="assets/shot_bomb.png" alt="Explosive arrow blast scattering a packed enemy group" width="853" height="360" loading="lazy"></div>
+        <figcaption><b>BOMB BLAST</b>Explosive arrows launch packed groups into the air.</figcaption></figure>
+      <figure class="shot"><div class="frame"><img src="assets/shot_forest.png" alt="Stage 3 whispering forest with a long enemy line" width="853" height="360" loading="lazy"></div>
+        <figcaption><b>STAGE 3 / WHISPERING FOREST</b>The enemy line stretches the whole lane.</figcaption></figure>
+      <figure class="shot"><div class="frame"><img src="assets/shot_moor.png" alt="Stage 5 storm moor with a power-up bubble floating over the field" width="853" height="360" loading="lazy"></div>
+        <figcaption><b>STAGE 5 / STORM MOOR</b>Shoot the floating bubbles for power-ups.</figcaption></figure>
+      <figure class="shot"><div class="frame"><img src="assets/shot_laststand.png" alt="Stage 6 with a heavily damaged friendly castle during the siege" width="853" height="360" loading="lazy"></div>
+        <figcaption><b>STAGE 6 / THE SIEGE</b>Castles show progressive damage. When yours falls, the last stand begins.</figcaption></figure>
+      <figure class="shot"><div class="frame"><img src="assets/shot_foundry.png" alt="Stage 8 iron foundry gorge, orange lava and smokestacks" width="853" height="360" loading="lazy"></div>
+        <figcaption><b>STAGE 8 / IRON FOUNDRY</b>Lava, smokestacks and Black Cavalry.</figcaption></figure>
+      <figure class="shot"><div class="frame"><img src="assets/shot_bats.png" alt="Stage 9 ash wastes with bats swarming the sky" width="853" height="360" loading="lazy"></div>
+        <figcaption><b>STAGE 9 / ASH WASTES</b>Bat swarms drop fire from above. Shoot them first.</figcaption></figure>
+      <figure class="shot wide"><div class="frame"><img src="assets/shot_blackking.png" alt="Stage 10: the Black King and his boss health bar over a blood-red citadel" width="853" height="360" loading="lazy"></div>
+        <figcaption><b>STAGE 10 / THE BLACK KING</b>One giant boss, one signature sword sweep that launches your soldiers back.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <h2>Features</h2>
+    <div class="feat">
+      <div class="panel"><h3>POINT-AND-CLICK ARCHERY</h3><p>Manual physics. Drag, aim the arc, release. Standard arrows have no cooldown.</p></div>
+      <div class="panel"><h3>HOLD TO FIRE</h3><p>Hold the button and keep shooting. Headshots kill instantly and chain into streaks.</p></div>
+      <div class="panel"><h3>THE BOW LEVELS UP</h3><p>Kills raise your bow level. Fire rate climbs from about one shot a second to about three.</p></div>
+      <div class="panel"><h3>FIVE SPECIAL ARROWS</h3><p>Fire, ice, pierce, explosive and lightning. Each has its own cooldown, independent of the others.</p></div>
+      <div class="panel"><h3>POWER-UP BUBBLES</h3><p>Shoot floating bubbles mid-battle. Some help, some are traps. Read the icon.</p></div>
+      <div class="panel"><h3>BATS AND BALLISTAS</h3><p>Bat swarms bomb your line from the air. Siege ballistas hurl flaming rocks at castles.</p></div>
+      <div class="panel"><h3>RECRUIT ON THE FLY</h3><p>Seven unit slots, one tap each, always on screen. Free auto-deploys are limited; manual buys cost gold.</p></div>
+      <div class="panel"><h3>BLACK KING BOSS</h3><p>Stage 10. Ordinary combat rules plus one huge sword sweep. Ten stages, one chapter, start to finish.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <h2>Full game and roadmap</h2>
+    <ul class="road">
+      <li><span class="tag done">NOW</span><span>Chapter 1, the Black Legion: 10 stages, playable start to finish. Escalating biomes from green meadow to a blood-red citadel.</span></li>
+      <li><span class="tag plan">PLANNED</span><span>Polish pass on art, audio and feel across all 10 stages.</span></li>
+      <li><span class="tag plan">PLANNED</span><span>More chapters beyond stage 10. Level skeleton is built to expand.</span></li>
+      <li><span class="tag plan">PLANNED</span><span>Alternate civilization skins and factions, built on the same systems.</span></li>
+      <li><span class="tag idea">IDEA</span><span>Mobile and controller support. Not started, not promised.</span></li>
+    </ul>
+    <p class="small" style="margin-top:16px">Planned means intended, not scheduled. Ideas are ideas.</p>
+  </div>
+</section>
+
+<section id="publishers">
+  <div class="wrap">
+    <h2>For publishers</h2>
+    <div class="panel pub">
+      <ul>
+        <li>10-stage vertical slice complete.</li>
+        <li>Playtested start to finish.</li>
+        <li>Built solo in Godot, pixel art, desktop and web builds.</li>
+        <li>Playable free in your browser, all 10 stages.</li>
+      </ul>
+      <p class="ask">SEEKING $100,000 IN FUNDING OR PUBLISHER SUPPORT to finish polish, content and launch.</p>
+      <p style="margin-top:18px"><a class="btn" data-mail href="#">CONTACT ME</a> &nbsp; <a class="btn ghost" href="one_sheet.pdf">ONE-SHEET PDF</a></p>
+    </div>
+  </div>
+</section>
+
+<section id="signup">
+  <div class="wrap two">
+    <div>
+      <h2>Get updates</h2>
+      <form id="signup-form" method="post" enctype="text/plain">
+        <label for="em">EMAIL</label>
+        <input id="em" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+        <button class="btn" type="submit">SIGN ME UP</button>
+        <p class="small">Opens your email app with a pre-filled message to the developer. Nothing is stored by this page.</p>
+      </form>
+    </div>
+    <div class="contact" id="contact">
+      <h2>Contact</h2>
+      <dl class="panel">
+        <dt>NAME</dt><dd data-owner-name></dd>
+        <dt>DM</dt><dd><a data-mail href="#"></a></dd>
+        <dt>INSTA</dt><dd><a data-insta href="#" rel="noopener"></a></dd>
+      </dl>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">ARROW COMMANDER &middot; made by <span data-owner-name></span>. Work in progress; screenshots are from the current build.</div></footer>
+
+<script>
+document.querySelectorAll('[data-play]').forEach(a=>a.href=PLAY_DEMO_URL);
+document.querySelectorAll('[data-mail]').forEach(a=>{a.href=DM_URL;a.target="_blank";a.rel="noopener";if(!a.textContent)a.textContent="DM "+INSTAGRAM_HANDLE});
+document.querySelectorAll('[data-insta]').forEach(a=>{a.href=INSTAGRAM_URL;a.textContent=INSTAGRAM_HANDLE});
+document.querySelectorAll('[data-owner-name]').forEach(e=>e.textContent=OWNER_NAME);
+document.getElementById('signup-form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const em=document.getElementById('em').value;
+  window.open(DM_URL,"_blank","noopener");
+});
+</script>
+</body>
+</html>
