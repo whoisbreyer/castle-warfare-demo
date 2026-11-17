@@ -156,12 +156,12 @@ const SIGNUP_ACTION = DM_URL;         // swap for a form-service URL later; mail
   <div class="wrap">
     <h2>What it is</h2>
     <p class="big">A side-view castle siege. Your castle on the left, the Black Legion on the right, one ground lane and the sky above it.</p>
-    <p>You are the Commander. You move left and right, aim a real arc with the mouse, and loose arrows with real physics. Your soldiers march, clash and die on their own. Recruit more with gold, or pick off the enemy that matters.</p>
+    <p>You are the Commander on the castle wall. Point and click to loose arrows with real physics. Your soldiers march, clash and die on their own. Recruit more with gold, or pick off the enemy that matters.</p>
     <ul class="rules">
       <li>Destroy the enemy castle and you win on the spot.</li>
       <li>Lose your castle and you do not lose the run. Reinforcements stop and the Commander is forced onto the field for a last stand.</li>
-      <li>The only way to lose is the Commander falling. No healing regen, so protect him.</li>
-      <li>Gold carries over between stages and retries. No timers, no XP trees, one currency.</li>
+      <li>The only way to lose is the Commander falling. No passive healing, so protect them.</li>
+      <li>Gold carries over between stages. No timers, no skill trees to manage, one currency.</li>
     </ul>
   </div>
 </section>
@@ -179,13 +179,13 @@ const SIGNUP_ACTION = DM_URL;         // swap for a form-service URL later; mail
       <figure class="shot"><div class="frame"><img src="assets/shot_moor.png" alt="Stage 5 storm moor with a power-up bubble floating over the field" width="853" height="360" loading="lazy"></div>
         <figcaption><b>STAGE 5 / STORM MOOR</b>Shoot the floating bubbles for power-ups.</figcaption></figure>
       <figure class="shot"><div class="frame"><img src="assets/shot_laststand.png" alt="Stage 6 with a heavily damaged friendly castle during the siege" width="853" height="360" loading="lazy"></div>
-        <figcaption><b>STAGE 6 / THE SIEGE</b>Castles show progressive damage. When yours falls, the last stand begins.</figcaption></figure>
+        <figcaption><b>STAGE 6 / AUTUMN RUINS</b>Castles show progressive damage. When yours falls, the last stand begins.</figcaption></figure>
       <figure class="shot"><div class="frame"><img src="assets/shot_foundry.png" alt="Stage 8 iron foundry gorge, orange lava and smokestacks" width="853" height="360" loading="lazy"></div>
-        <figcaption><b>STAGE 8 / IRON FOUNDRY</b>Lava, smokestacks and Black Cavalry.</figcaption></figure>
+        <figcaption><b>STAGE 8 / IRON FOUNDRY</b>Lava, smokestacks and a pressing Black Legion horde.</figcaption></figure>
       <figure class="shot"><div class="frame"><img src="assets/shot_bats.png" alt="Stage 9 ash wastes with bats swarming the sky" width="853" height="360" loading="lazy"></div>
-        <figcaption><b>STAGE 9 / ASH WASTES</b>Bat swarms drop fire from above. Shoot them first.</figcaption></figure>
+        <figcaption><b>STAGE 9 / ASH WASTES</b>Bat swarms drop fire from above (from stage 7). Shoot them first.</figcaption></figure>
       <figure class="shot wide"><div class="frame"><img src="assets/shot_blackking.png" alt="Stage 10: the Black King and his boss health bar over a blood-red citadel" width="853" height="360" loading="lazy"></div>
-        <figcaption><b>STAGE 10 / THE BLACK KING</b>One giant boss, one signature sword sweep that launches your soldiers back.</figcaption></figure>
+        <figcaption><b>STAGE 10 / THE BLACK KING</b>One giant armored boss that tears through your army. Hold the line and bring him down.</figcaption></figure>
     </div>
   </div>
 </section>
@@ -194,14 +194,14 @@ const SIGNUP_ACTION = DM_URL;         // swap for a form-service URL later; mail
   <div class="wrap">
     <h2>Features</h2>
     <div class="feat">
-      <div class="panel"><h3>POINT-AND-CLICK ARCHERY</h3><p>Manual physics. Drag, aim the arc, release. Standard arrows have no cooldown.</p></div>
-      <div class="panel"><h3>HOLD TO FIRE</h3><p>Hold the button and keep shooting. Headshots kill instantly and chain into streaks.</p></div>
-      <div class="panel"><h3>THE BOW LEVELS UP</h3><p>Kills raise your bow level. Fire rate climbs from about one shot a second to about three.</p></div>
+      <div class="panel"><h3>POINT-AND-CLICK ARCHERY</h3><p>Manual physics. Point where you want the arrow to land and click. Standard arrows never run out.</p></div>
+      <div class="panel"><h3>HOLD TO FIRE</h3><p>Hold the mouse button and keep shooting. Headshots kill instantly and chain into streaks.</p></div>
+      <div class="panel"><h3>THE BOW LEVELS UP</h3><p>Your own kills raise your bow level, with a level-up flash and a call from your herald. Fire rate climbs from about one shot a second to about three.</p></div>
       <div class="panel"><h3>FIVE SPECIAL ARROWS</h3><p>Fire, ice, pierce, explosive and lightning. Each has its own cooldown, independent of the others.</p></div>
-      <div class="panel"><h3>POWER-UP BUBBLES</h3><p>Shoot floating bubbles mid-battle. Some help, some are traps. Read the icon.</p></div>
-      <div class="panel"><h3>BATS AND BALLISTAS</h3><p>Bat swarms bomb your line from the air. Siege ballistas hurl flaming rocks at castles.</p></div>
-      <div class="panel"><h3>RECRUIT ON THE FLY</h3><p>Seven unit slots, one tap each, always on screen. Free auto-deploys are limited; manual buys cost gold.</p></div>
-      <div class="panel"><h3>BLACK KING BOSS</h3><p>Stage 10. Ordinary combat rules plus one huge sword sweep. Ten stages, one chapter, start to finish.</p></div>
+      <div class="panel"><h3>POWER-UP BUBBLES</h3><p>Shoot floating bubbles mid-battle for battle horns, healing, gold, rapid fire and free cavalry. A few are traps.</p></div>
+      <div class="panel"><h3>BATS AND BALLISTAS</h3><p>Bat swarms bomb your line from the air. Siege ballistas on both sides lob flaming rocks at castles from across the map.</p></div>
+      <div class="panel"><h3>RECRUIT ON THE FLY</h3><p>Seven unit slots, one tap each, always on screen. Small free waves march out on their own; buy more with gold.</p></div>
+      <div class="panel"><h3>BLACK KING BOSS</h3><p>Stage 10. A giant boss and a last stand to win. Ten stages, one chapter, start to finish.</p></div>
     </div>
   </div>
 </section>
@@ -241,10 +241,8 @@ const SIGNUP_ACTION = DM_URL;         // swap for a form-service URL later; mail
     <div>
       <h2>Get updates</h2>
       <form id="signup-form" method="post" enctype="text/plain">
-        <label for="em">EMAIL</label>
-        <input id="em" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
-        <button class="btn" type="submit">SIGN ME UP</button>
-        <p class="small">Opens your email app with a pre-filled message to the developer. Nothing is stored by this page.</p>
+        <button class="btn" type="submit">DM ME ON INSTAGRAM</button>
+        <p class="small">Opens an Instagram DM to the developer. Nothing is stored by this page.</p>
       </form>
     </div>
     <div class="contact" id="contact">
@@ -268,7 +266,6 @@ document.querySelectorAll('[data-insta]').forEach(a=>{a.href=INSTAGRAM_URL;a.tex
 document.querySelectorAll('[data-owner-name]').forEach(e=>e.textContent=OWNER_NAME);
 document.getElementById('signup-form').addEventListener('submit',e=>{
   e.preventDefault();
-  const em=document.getElementById('em').value;
   window.open(DM_URL,"_blank","noopener");
 });
 </script>
