@@ -122,7 +122,7 @@ footer{padding:28px 0 48px;color:var(--dim);font-size:18px;border-top:4px solid 
 /* ===== OWNER: FILL THESE IN. Nothing is sent anywhere until you do. ===== */
 const PLAY_DEMO_URL = "https://whoisbreyer.github.io/castle-warfare-demo/";          // e.g. your itch.io / Pages link to the 3-stage web demo
 const OWNER_NAME    = "Breyer White";               // shown in contact + footer
-const OWNER_EMAIL   = "";              // contact + signup mailto target
+const OWNER_EMAIL   = "breyer@whoisbreyer.com";              // contact + signup mailto target
 const INSTAGRAM_URL = "https://instagram.com/whoisbreyer";
 const INSTAGRAM_HANDLE = "@whoisbreyer";
 const DM_URL = "https://ig.me/m/whoisbreyer";
@@ -249,6 +249,7 @@ const SIGNUP_ACTION = DM_URL;         // swap for a form-service URL later; mail
       <h2>Contact</h2>
       <dl class="panel">
         <dt>NAME</dt><dd data-owner-name></dd>
+        <dt>EMAIL</dt><dd><a data-email href="#"></a></dd>
         <dt>DM</dt><dd><a data-mail href="#"></a></dd>
         <dt>INSTA</dt><dd><a data-insta href="#" rel="noopener"></a></dd>
       </dl>
@@ -263,6 +264,7 @@ const SIGNUP_ACTION = DM_URL;         // swap for a form-service URL later; mail
 document.querySelectorAll('[data-play]').forEach(a=>a.href=PLAY_DEMO_URL);
 document.querySelectorAll('[data-mail]').forEach(a=>{a.href=DM_URL;a.target="_blank";a.rel="noopener";if(!a.textContent)a.textContent="DM "+INSTAGRAM_HANDLE});
 document.querySelectorAll('[data-insta]').forEach(a=>{a.href=INSTAGRAM_URL;a.textContent=INSTAGRAM_HANDLE});
+document.querySelectorAll('[data-email]').forEach(a=>{a.href='mailto:'+OWNER_EMAIL+'?subject='+encodeURIComponent('Arrow Commander');a.textContent=OWNER_EMAIL});
 document.querySelectorAll('[data-owner-name]').forEach(e=>e.textContent=OWNER_NAME);
 document.getElementById('signup-form').addEventListener('submit',e=>{
   e.preventDefault();
